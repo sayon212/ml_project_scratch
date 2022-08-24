@@ -65,7 +65,10 @@ Create folder structure .github\workflows\main.yaml
 
 ====================================================================
 
-Create Housing Folder and create __init__.py file
+1. Create Housing Folder and create __init__.py file
 Create setup.py file
 -e . will install all local libraries which we will create inside housing folder
 add -e . at last inside requirements.txt file . setup.py is mandatory for -e .
+
+2. Inside housing folder create subfolders - component , config , entity , logger , 
+exception , pipeline. Now create __init__.py inside each folder
