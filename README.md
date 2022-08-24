@@ -61,3 +61,11 @@ Stop Docker Image:
 docker stop <container_id>
 
 Create folder structure .github\workflows\main.yaml
+
+
+====================================================================
+
+Create Housing Folder and create __init__.py file
+Create setup.py file
+-e . will install all local libraries which we will create inside housing folder
+add -e . at last inside requirements.txt file . setup.py is mandatory for -e .
