@@ -3,18 +3,23 @@ from housing.logger import logging
 from housing.exception import HousingException
 import sys
 
-app = Flask(__name__)
+from housing.pipeline.pipeline import Pipeline
 
-logging.info("Testing Logger")
+pl = Pipeline()
+pl.run_pipeline()
 
-@app.route("/" , methods = ['GET' , 'POST'])
-def index():
-    try:
-        raise Exception("We are testing Exception...")
-    except Exception as e:
-        housing_exception = HousingException(e,sys)
-        logging.info(housing_exception.error_message)
-    return "CI CD Pipeline Created for ML Project"
+# app = Flask(__name__)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# logging.info("Testing Logger")
+
+# @app.route("/" , methods = ['GET' , 'POST'])
+# def index():
+#     try:
+#         raise Exception("We are testing Exception...")
+#     except Exception as e:
+#         housing_exception = HousingException(e,sys)
+#         logging.info(housing_exception.error_message)
+#     return "CI CD Pipeline Created for ML Project"
+
+# if __name__ == "__main__":
+#     app.run(debug=True)

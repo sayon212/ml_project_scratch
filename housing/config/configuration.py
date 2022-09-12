@@ -7,19 +7,42 @@ import os , sys
 
 class Configuration:
     def __init__(self , config_file_path:str = CONFIG_FILE_PATH , current_time_stamp:str = CURRENT_TIME_STAMP)->None:
-        # declare config_info to read data from yaml file
-        self.config_info = read_yaml_file(file_path=config_file_path)
+        try:
+            # declare config_info to read data from yaml file
+            self.config_info = read_yaml_file(file_path=config_file_path)
 
-        # declare training_pipeline_config and call get_training_pipeline_config function
-        self.training_pipeline_config = self.get_training_pipeline_config()
+            # declare training_pipeline_config and call get_training_pipeline_config function
+            self.training_pipeline_config = self.get_training_pipeline_config()
 
-        # declare var to store timestamp
-        self.time_stamp = current_time_stamp
+            # declare var to store timestamp
+            self.time_stamp = current_time_stamp
+        
+        except Exception as e:
+            raise HousingException(e,sys) from e
 
     def get_data_ingestion_config(self)->DataIngestionConfig:
-        pass
+        try:
+            # refer notebook for working
+            artifact_dir = self.training_pipeline_config.artifact_dir
+            data_ingestion_artifact_dir = os.path.join(artifact_dir , DATA_INGESTION_ARTIFACT_DIR_KEY , self.time_stamp)
+            data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]
+            dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
+            tgz_download_url = os.path.join(data_ingestion_artifact_dir , data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY])
+            raw_data_dir = os.path.join(data_ingestion_artifact_dir , data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY])
+            ingested_data_dir = os.path.join(data_ingestion_artifact_dir , data_ingestion_info[DATA_INGESTION_INGESTED_DIR_NAME_KEY])
+            ingested_trained_dir = os.path.join(ingested_data_dir , data_ingestion_info[DATA_INGESTION_TRAIN_DIR_KEY])
+            ingested_test_dir = os.path.join(ingested_data_dir , data_ingestion_info[DATA_INGESTION_TEST_DIR_KEY])
 
-    get_data_ingestion_config()
+            data_ingestion_config = DataIngestionConfig(
+                dataset_download_url = dataset_download_url , 
+                tgz_download_url = tgz_download_url , 
+                raw_data_dir = raw_data_dir , 
+                ingested_trained_dir = ingested_trained_dir , 
+                ingested_test_dir = ingested_test_dir
+            )
+            return data_ingestion_config
+        except Exception as e:
+            raise HousingException(e,sys) from e
 
     def get_data_validation_config(self)->DataValidationConfig:
         pass
