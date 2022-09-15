@@ -1,3 +1,4 @@
+from ast import Try
 from housing.entity.config_entity import *
 from housing.util.util import read_yaml_file
 from housing.constant import *
@@ -45,7 +46,10 @@ class Configuration:
             raise HousingException(e,sys) from e
 
     def get_data_validation_config(self)->DataValidationConfig:
-        pass
+        try:
+            pass
+        except Exception as e:
+            raise HousingException(e,sys) from e
 
     def get_data_transformation_config(self)->DataTransformationConfig:
         pass

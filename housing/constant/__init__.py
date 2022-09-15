@@ -20,3 +20,7 @@ DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir"
 DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
 DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
 DATA_INGESTION_ARTIFACT_DIR_KEY = "data_ingestion"
+
+# data validation variables
+DATA_VALIDATION_CONFIG_KEY = "data_validation_config"
+DATA_VALIDATION_SCHEMA_FILE_NAME_KEY = "schema.yaml"
